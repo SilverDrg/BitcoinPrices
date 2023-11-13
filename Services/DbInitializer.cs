@@ -29,7 +29,7 @@ namespace BitcoinPrices.Services
                 }
                 DateTime current = DateTime.Now;
                 DateTime updated = current.Subtract(new TimeSpan(dayIteration, hourIteration, 0, 0));
-                var newPrice = new BitcoinPrice { CreatedAt = updated, Price = Math.Round(RandomExtensions.NextDouble(random, 16651.71, 36722.46), 2) };
+                var newPrice = new BitcoinPrice { CreatedAt = updated, Price = Math.Round(RandomExtensions.NextDouble(random, 16651.71, 36722.46), 2) }; // The chosen numbers are the lowest and highest price of Bitcoin in the year 2023
                 prices.Add(newPrice);
 
                 hourIteration++;

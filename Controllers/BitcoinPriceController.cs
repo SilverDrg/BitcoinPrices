@@ -33,20 +33,6 @@ namespace BitcoinPrices.Controllers
         }
 
         // GET api/<BitcoinPriceController>/5
-        [HttpGet("All")]
-        public async Task<ActionResult<IEnumerable<BitcoinPrice>>> GetAll(int id)
-        {
-            var prices = await _context.BitcoinPrices.OrderByDescending(p => p.Id).ToListAsync();
-
-            if (prices == null)
-            {
-                return NotFound();
-            }
-
-            return prices;
-        }
-
-        // GET api/<BitcoinPriceController>/5
         [HttpGet("GetAveragePriceForDate/{date}")]
         public async Task<ActionResult<BitcoinPriceDTO>> GetAveragePriceForDate(DateTime date)
         {
@@ -58,6 +44,20 @@ namespace BitcoinPrices.Controllers
             foreach (var pr in prices) sum += pr.Price;
             double average = Math.Round(sum / count, 2);
             return new BitcoinPriceDTO() { Price = average, FromDate = date };
+        }
+
+        // GET api/<BitcoinPriceController>/5
+        [HttpGet("All")]
+        public async Task<ActionResult<IEnumerable<BitcoinPrice>>> GetAll(int id)
+        {
+            var prices = await _context.BitcoinPrices.OrderByDescending(p => p.Id).ToListAsync();
+
+            if (prices == null)
+            {
+                return NotFound();
+            }
+
+            return prices;
         }
 
         // DELETE api/<BitcoinPriceController>/5
